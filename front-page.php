@@ -1,47 +1,64 @@
 <?php get_header(); ?>
 
-<main>
+<!-- ==========================
+     HERO / IMAGE DE FOND
+========================== -->
+<section class="homepage-hero">
+    <div class="hero-content">
+        <h1>Bienvenue sur MH eLearning</h1>
+        <p>Apprenez à votre rythme avec nos cours en ligne interactifs</p>
+        <a href="#courses" class="button">Voir nos cours</a>
+    </div>
+</section>
 
-    <!-- Slider -->
-    <?php get_template_part('template-parts/content', 'slider'); ?>
+<!-- ==========================
+     NOS COURS
+========================== -->
+<section id="courses" class="homepage-courses">
+    <div class="section-container">
+        <h2>Nos Cours</h2>
+        <?php
+        $courses = new WP_Query(array(
+            'post_type' => 'cours',
+            'posts_per_page' => 4
+        ));
+        if($courses->have_posts()):
+            echo '<div class="courses-grid">';
+            while($courses->have_posts()): $courses->the_post(); ?>
+                <div class="course-card">
+                    <?php if(has_post_thumbnail()) the_post_thumbnail('medium'); ?>
+                    <h3><?php the_title(); ?></h3>
+                    <a href="<?php the_permalink(); ?>" class="button">Découvrir</a>
+                </div>
+            <?php endwhile;
+            echo '</div>';
+            wp_reset_postdata();
+        else:
+            echo '<p>Aucun cours disponible pour le moment.</p>';
+        endif;
+        ?>
+    </div>
+</section>
 
-    <!-- Section Nos Cours -->
-    <section class="courses-section" style="padding:50px 20px; background:#f5f5f5;">
-        <h2 style="text-align:center; margin-bottom:30px;">Nos Cours</h2>
-        <div class="courses-container" style="display:flex; flex-wrap:wrap; gap:20px; justify-content:center;">
-            <?php
-            $args = array(
-                'post_type' => 'cours',
-                'posts_per_page' => 6
-            );
-            $loop = new WP_Query($args);
-            if($loop->have_posts()):
-                while($loop->have_posts()): $loop->the_post(); ?>
-                    <div class="course-card" style="width:300px; background:white; padding:15px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
-                        <a href="<?php the_permalink(); ?>">
-                            <?php the_post_thumbnail('medium', array('style'=>'width:100%; height:auto;')); ?>
-                            <h3 style="margin-top:10px;"><?php the_title(); ?></h3>
-                        </a>
-                        <p><?php echo wp_trim_words(get_the_content(), 20); ?></p>
-                        <a href="<?php the_permalink(); ?>" style="color:#0073aa; text-decoration:none;">Voir le cours →</a>
-                    </div>
-                <?php endwhile;
-                wp_reset_postdata();
-            else: ?>
-                <p>Aucun cours pour le moment.</p>
-            <?php endif; ?>
-        </div>
-    </section>
-
-    <!-- Section À propos -->
-    <section class="about-section" style="padding:50px 20px; text-align:center;">
+<!-- ==========================
+     À PROPOS
+========================== -->
+<section id="about" class="homepage-about">
+    <div class="section-container">
         <h2>À propos de MH eLearning</h2>
-        <p style="max-width:700px; margin:20px auto;">
-            MH eLearning vous propose des cours en ligne modernes et interactifs pour apprendre à votre rythme.
-            Découvrez nos formations et commencez dès aujourd'hui à développer vos compétences.
-        </p>
-    </section>
+        <p>MH eLearning vous accompagne dans votre apprentissage en ligne avec des contenus interactifs, accessibles à tout moment et certifiés.</p>
+    </div>
+</section>
 
-</main>
+<!-- ==========================
+     CALL TO ACTION / CONTACT
+========================== -->
+<section id="contact" class="homepage-cta">
+    <div class="section-container">
+        <h2>Contactez-nous</h2>
+        <p>Vous avez des questions ou souhaitez vous inscrire ?</p>
+        <a href="<?php echo get_permalink(get_page_by_path('contact')); ?>" class="button">Nous contacter</a>
+    </div>
+</section>
 
 <?php get_footer(); ?>

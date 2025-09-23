@@ -10,6 +10,14 @@ function mh_elearning_assets() {
 }
 add_action('wp_enqueue_scripts', 'mh_elearning_assets');
 
+
+function mh_enqueue_scripts() {
+    wp_enqueue_style('mh-style', get_stylesheet_uri());
+    wp_enqueue_script('mh-slider', get_template_directory_uri() . '/assets/js/slider.js', array(), false, true);
+}
+add_action('wp_enqueue_scripts', 'mh_enqueue_scripts');
+
+
 function mh_elearning_widgets_init() {
     register_sidebar(array(
         'name'          => 'Footer Widget 1',
@@ -62,3 +70,17 @@ function mh_elearning_custom_post_type() {
     register_post_type('cours', $args);
 }
 add_action('init', 'mh_elearning_custom_post_type');
+add_theme_support('align-wide'); // pour large/full-width blocks
+add_theme_support('editor-styles');
+add_theme_support('wp-block-styles');
+add_theme_support('responsive-embeds');
+
+if (!function_exists('mh_enqueue_scripts')) {
+    function mh_enqueue_scripts() {
+        wp_enqueue_style('mh-style', get_stylesheet_uri());
+        wp_enqueue_script('mh-slider', get_template_directory_uri() . '/assets/js/slider.js', array('jquery'), false, true);
+    }
+    add_action('wp_enqueue_scripts', 'mh_enqueue_scripts');
+}
+
+

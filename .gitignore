@@ -1,0 +1,17 @@
+# Fichiers système
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Dossiers Node / Composer
+node_modules/
+vendor/
+
+# Caches / Builds
+.sass-cache/
+*.zip
+
+# Configurations locales
+wp-config.php

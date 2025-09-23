@@ -1,15 +1,20 @@
 <div class="slider">
     <?php
-    $args = array('post_type'=>'cours', 'posts_per_page'=>5);
-    $loop = new WP_Query($args);
-    if($loop->have_posts()):
-        while($loop->have_posts()): $loop->the_post(); ?>
+    // Ici on récupère les "slides" via un custom post type ou des pages / articles avec catégorie "slider"
+    $slides = new WP_Query(array(
+        'post_type' => 'post',   // ou 'slide' si tu crées un CPT
+        'category_name' => 'slider', // catégorie "slider"
+        'posts_per_page' => 5
+    ));
+    if($slides->have_posts()):
+    ?>
+        <?php while($slides->have_posts()): $slides->the_post(); ?>
             <div class="slide">
-                <?php the_post_thumbnail('large'); ?>
+                <?php if(has_post_thumbnail()): ?>
+                    <?php the_post_thumbnail('large'); ?>
+                <?php endif; ?>
                 <h2><?php the_title(); ?></h2>
             </div>
-        <?php endwhile;
-        wp_reset_postdata();
-    endif;
-    ?>
+        <?php endwhile; wp_reset_postdata(); ?>
+    <?php endif; ?>
 </div>
