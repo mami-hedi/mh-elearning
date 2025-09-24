@@ -1,13 +1,23 @@
 <?php get_header(); ?>
 
 <!-- ==========================
-     HERO / IMAGE DE FOND
+     HERO SECTION (2 colonnes)
 ========================== -->
 <section class="homepage-hero">
-    <div class="hero-content">
-        <h1>Bienvenue sur MH eLearning</h1>
-        <p>Apprenez à votre rythme avec nos cours en ligne interactifs</p>
-        <a href="#courses" class="button">Voir nos cours</a>
+    <div class="section-container hero-grid">
+        <!-- Texte à gauche -->
+        <div class="hero-text">
+            <h1><?php echo get_theme_mod('mh_hero_title', 'Bienvenue sur MH eLearning'); ?></h1>
+            <p><?php echo get_theme_mod('mh_hero_subtitle', 'Apprenez à votre rythme avec nos cours en ligne interactifs'); ?></p>
+            <a href="<?php echo get_theme_mod('mh_hero_cta_link', '#courses'); ?>" class="button">
+                <?php echo get_theme_mod('mh_hero_cta', 'Voir nos cours'); ?>
+            </a>
+        </div>
+
+        <!-- Image à droite -->
+        <div class="hero-image">
+            <img src="<?php echo get_theme_mod('mh_hero_background', get_template_directory_uri().'/assets/images/hero.jpg'); ?>" alt="Hero eLearning">
+        </div>
     </div>
 </section>
 
@@ -41,17 +51,50 @@
 </section>
 
 <!-- ==========================
-     À PROPOS
+     AVIS / TÉMOIGNAGES
 ========================== -->
-<section id="about" class="homepage-about">
+<section id="reviews" class="homepage-reviews">
     <div class="section-container">
-        <h2>À propos de MH eLearning</h2>
-        <p>MH eLearning vous accompagne dans votre apprentissage en ligne avec des contenus interactifs, accessibles à tout moment et certifiés.</p>
+        <h2>Ce que disent nos étudiants</h2>
+        <div class="reviews-grid">
+            <div class="review">
+                <p>"Excellente plateforme, j’ai appris rapidement et efficacement."</p>
+                <span>- Sarah M.</span>
+            </div>
+            <div class="review">
+                <p>"Les cours sont clairs et bien structurés, je recommande vivement !"</p>
+                <span>- Karim B.</span>
+            </div>
+            <div class="review">
+                <p>"Support réactif et formateurs compétents. Bravo MH eLearning !"</p>
+                <span>- Leïla T.</span>
+            </div>
+        </div>
     </div>
 </section>
 
 <!-- ==========================
-     CALL TO ACTION / CONTACT
+     À PROPOS
+========================== -->
+<section id="about" class="homepage-about">
+    <div class="section-container about-grid">
+        <!-- Image à gauche -->
+        <div class="about-image">
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/about.jpg" alt="À propos de MH eLearning">
+        </div>
+        <!-- Texte à droite -->
+        <div class="about-text">
+            <h2>À propos de MH eLearning</h2>
+            <p>MH eLearning vous accompagne dans votre apprentissage en ligne avec des contenus interactifs, accessibles à tout moment et certifiés.</p>
+        </div>
+
+        
+    </div>
+</section>
+
+
+<!-- ==========================
+     CONTACT
 ========================== -->
 <section id="contact" class="homepage-cta">
     <div class="section-container">
